@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NotesAppBar(),
+      appBar: NotesAppBar(title: 'Notes'),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

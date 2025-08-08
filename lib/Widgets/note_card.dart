@@ -22,7 +22,6 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      // The ListTile provides its own padding, so we'll adjust the main padding.
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 16.0,
         vertical: 8.0,
@@ -30,7 +29,7 @@ class NoteCard extends StatelessWidget {
       title: Text(
         title,
         style: GoogleFonts.roboto(
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
           color: Theme.of(context).colorScheme.inversePrimary,
         ),
@@ -38,37 +37,43 @@ class NoteCard extends StatelessWidget {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 4),
-          Text(
-            'Edited $lasEdited',
-            style: GoogleFonts.roboto(
-              fontSize: 12,
-              color: const Color.fromRGBO(124, 140, 180, 1.0),
-            ),
-          ),
           Text(
             description,
             style: GoogleFonts.roboto(
-              fontSize: 14,
-              color: const Color.fromRGBO(124, 140, 180, 1.0),
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF6370A0),
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
+          const SizedBox(height: 4),
+          Text(
+            'Edited $lasEdited',
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF6370A0),
+            ),
+          ),
         ],
       ),
-      trailing: IconButton(
-        onPressed: () => showPopover(
-          width: 100,
-          height: 100,
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          context: context,
-          bodyBuilder: (context) => NotesSettings(
-            onEditPressed: onEditPressed,
-            onDeletePressed: onDeletePressed,
-          ),
-        ),
-        icon: const Icon(Icons.menu),
+      trailing: Builder(
+        builder: (context) {
+          return IconButton(
+            onPressed: () => showPopover(
+              width: 100,
+              height: 100,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              context: context,
+              bodyBuilder: (context) => NotesSettings(
+                onEditPressed: onEditPressed,
+                onDeletePressed: onDeletePressed,
+              ),
+            ),
+            icon: const Icon(Icons.menu),
+          );
+        },
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app_new/Models/note_database.dart';
 import 'package:note_app_new/Widgets/note_card.dart';
-import 'package:note_app_new/Widgets/notes_app_bar.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -35,7 +34,6 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NotesAppBar(),
       body: Column(
         children: [
           const SizedBox(height: 10),
@@ -88,7 +86,7 @@ class _NotesPageState extends State<NotesPage> {
                         description: note.description,
                         lasEdited: note.lastEdited.toString(),
                         onEditPressed: () {},
-                        onDeletePressed: () {},
+                        onDeletePressed: () => deleteNote(note.id),
                       ),
                     );
                   },
