@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app_new/Models/note_database.dart';
+import 'package:note_app_new/Screens/add_note_page.dart';
 import 'package:note_app_new/Screens/home_page.dart';
+import 'package:note_app_new/Screens/notes_page.dart';
+import 'package:note_app_new/Screens/settings_screen.dart';
 import 'package:note_app_new/controller_binders.dart';
 import 'package:note_app_new/theme/theme_controller.dart';
 
@@ -23,7 +26,16 @@ class MyApp extends StatelessWidget {
           theme: controller.themeData,
           debugShowCheckedModeBanner: false,
           initialBinding: ControllerBinders(),
-          home: const HomePage(),
+          initialRoute: '/home',
+          getPages: [
+            GetPage(name: HomePage.name, page: () => const HomePage()),
+            GetPage(
+              name: SettingsScreen.name,
+              page: () => const SettingsScreen(),
+            ),
+            GetPage(name: NotesPage.name, page: () => const NotesPage()),
+            GetPage(name: AddNotePage.name, page: () => const AddNotePage()),
+          ],
         );
       },
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
 import 'package:note_app_new/Screens/notes_page.dart';
 import 'package:note_app_new/Screens/settings_screen.dart';
+import 'package:note_app_new/Widgets/notes_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,19 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Notes',
-          style: GoogleFonts.roboto(fontWeight: FontWeight.w700),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.add, size: 35)),
-        ],
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      appBar: NotesAppBar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
