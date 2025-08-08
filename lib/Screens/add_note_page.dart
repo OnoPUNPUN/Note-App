@@ -45,7 +45,7 @@ class _AddNotePageState extends State<AddNotePage> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _titleTEController,
-                  decoration: const InputDecoration(hintText: 'Title'),
+                  decoration: const InputDecoration(),
                   validator: (String? value) {
                     if (value?.trim().isEmpty ?? true) {
                       return 'Enter your Title';
@@ -71,7 +71,6 @@ class _AddNotePageState extends State<AddNotePage> {
                     expands: true,
                     decoration: const InputDecoration(),
                     validator: (String? value) {
-                      // This validator can be removed if a description is not required
                       return null;
                     },
                   ),

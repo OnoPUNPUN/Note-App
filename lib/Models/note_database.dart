@@ -23,6 +23,8 @@ class NoteDatabase extends GetxController {
       ..lastEdited = DateTime.now();
 
     await isar.writeTxn(() => isar.notes.put(newNote));
+    await fetchNotes();
+    update();
   }
 
   // R E A D -- all notes
