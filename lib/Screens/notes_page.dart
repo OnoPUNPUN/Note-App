@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app_new/Models/note_database.dart';
+import 'package:note_app_new/Widgets/note_card.dart';
 import 'package:note_app_new/Widgets/notes_app_bar.dart';
 
 class NotesPage extends StatefulWidget {
@@ -24,6 +25,11 @@ class _NotesPageState extends State<NotesPage> {
   // Read all notes
   void readNotes() {
     noteDatabase.fetchNotes();
+  }
+
+  // delete a notes
+  void deleteNote(int id) {
+    noteDatabase.deleteNote(id);
   }
 
   @override
@@ -75,6 +81,16 @@ class _NotesPageState extends State<NotesPage> {
                   itemCount: currentNotes.length,
                   itemBuilder: (context, index) {
                     final note = currentNotes[index];
+                    return Card(
+                      elevation: 0,
+                      child: NoteCard(
+                        title: note.title,
+                        description: note.description,
+                        lasEdited: note.lastEdited.toString(),
+                        onEditPressed: () {},
+                        onDeletePressed: () {},
+                      ),
+                    );
                   },
                 );
               },
