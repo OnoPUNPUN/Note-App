@@ -12,7 +12,8 @@ Welcome to the **Note-Taking App**, a sleek and intuitive application built usin
 ## 📸 Screenshots
 | Light Mode | Dark Mode | Add Note | Notes List (Light) | Notes List (Dark) | Settings (Light) | Settings (Dark) |
 |------------|-----------|----------|---------------------|-------------------|------------------|-----------------|
-| ![Light Mode](screenshots\S2.png) | ![Dark Mode](sscreenshots\S8.png) | ![Add Note](screenshots\S4.png) | ![Notes List (Light)](sscreenshots\S5.png) | ![Settings (Light)](screenshots\S3.png) | ![Settings (Dark)](screenshots\S7.png) |
+| ![Light Mode](screenshots/S2.png) | ![Dark Mode](screenshots/S8.png) | ![Add Note](screenshots/S4.png) | ![Notes List (Light)](screenshots/S5.png) | ![Notes List (Dark)](screenshots/S6.png) | ![Settings (Light)](screenshots/S3.png) | ![Settings (Dark)](screenshots/S7.png) |
+
 
 ## 📂 Project Structure
 ```
