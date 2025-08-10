@@ -1,13 +1,17 @@
-// screens/add_note_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:note_app_new/Models/note.dart'; // Your note model
 import 'package:note_app_new/Models/note_database.dart';
 import 'package:note_app_new/Widgets/notes_app_bar.dart';
 
 class AddNotePage extends StatefulWidget {
-  const AddNotePage({super.key});
+  final Note? noteToEdit; // null = add mode, not null = edit mode
+
+  const AddNotePage({super.key, this.noteToEdit});
+
   static const String name = '/add-note-page';
+
   @override
   State<AddNotePage> createState() => _AddNotePageState();
 }
@@ -20,12 +24,23 @@ class _AddNotePageState extends State<AddNotePage> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    // If we are editing, fill in the existing note data
+    if (widget.noteToEdit != null) {
+      _titleTEController.text = widget.noteToEdit!.title;
+      _descriptionTEController.text = widget.noteToEdit!.description;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isEditing = widget.noteToEdit != null;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      appBar: NotesAppBar(title: 'Add Note'),
+      appBar: NotesAppBar(title: isEditing ? 'Edit Note' : 'Add Note'),
       body: SafeArea(
         child: Form(
           key: _globalKey,
@@ -70,9 +85,6 @@ class _AddNotePageState extends State<AddNotePage> {
                     maxLines: null,
                     expands: true,
                     decoration: const InputDecoration(),
-                    validator: (String? value) {
-                      return null;
-                    },
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -81,7 +93,7 @@ class _AddNotePageState extends State<AddNotePage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        addNote();
+                        isEditing ? updateNote() : addNote();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: colorScheme.secondary,
@@ -97,12 +109,14 @@ class _AddNotePageState extends State<AddNotePage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Save',
+                            isEditing ? 'Update' : 'Save',
                             style: TextStyle(color: colorScheme.inversePrimary),
                           ),
                           const SizedBox(width: 8),
                           Icon(
-                            Icons.arrow_circle_right_outlined,
+                            isEditing
+                                ? Icons.check_circle_outline
+                                : Icons.arrow_circle_right_outlined,
                             color: colorScheme.inversePrimary,
                           ),
                         ],
@@ -121,6 +135,17 @@ class _AddNotePageState extends State<AddNotePage> {
   void addNote() {
     if (_globalKey.currentState?.validate() ?? false) {
       noteDatabase.addNote(
+        _titleTEController.text.trim(),
+        _descriptionTEController.text.trim(),
+      );
+      Get.back();
+    }
+  }
+
+  void updateNote() {
+    if (_globalKey.currentState?.validate() ?? false) {
+      noteDatabase.updateNote(
+        widget.noteToEdit!.id,
         _titleTEController.text.trim(),
         _descriptionTEController.text.trim(),
       );

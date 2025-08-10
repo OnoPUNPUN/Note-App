@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app_new/Models/note_database.dart';
+import 'package:note_app_new/Screens/add_note_page.dart';
 import 'package:note_app_new/Widgets/note_card.dart';
 import 'package:note_app_new/Widgets/notes_app_bar.dart';
 
@@ -87,7 +88,9 @@ class _NotesPageState extends State<NotesPage> {
                         title: note.title,
                         description: note.description,
                         lasEdited: note.lastEdited.toString(),
-                        onEditPressed: () {},
+                        onEditPressed: () {
+                          Get.to(() => AddNotePage(noteToEdit: note));
+                        },
                         onDeletePressed: () => deleteNote(note.id),
                       ),
                     );
