@@ -5,6 +5,7 @@ import 'package:note_app_new/Screens/add_note_page.dart';
 import 'package:note_app_new/Screens/home_page.dart';
 import 'package:note_app_new/Screens/notes_page.dart';
 import 'package:note_app_new/Screens/settings_screen.dart';
+import 'package:note_app_new/Screens/splash_screen.dart';
 import 'package:note_app_new/controller_binders.dart';
 import 'package:note_app_new/theme/theme_controller.dart';
 
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
           theme: controller.themeData,
           debugShowCheckedModeBanner: false,
           initialBinding: ControllerBinders(),
-          initialRoute: '/home',
+          initialRoute: '/',
           getPages: [
+            GetPage(name: SplashScreen.name, page: () => const SplashScreen()),
             GetPage(name: HomePage.name, page: () => const HomePage()),
             GetPage(
               name: SettingsScreen.name,
